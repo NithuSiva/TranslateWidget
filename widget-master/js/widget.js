@@ -50,6 +50,19 @@ class LeMondeView extends WidgetView {
 		this.link = HH.create("a");
 		SS.style(this.link, {"fontSize": "10px", "textDecoration": "none"});
 		this.stage.appendChild(this.link);
+		
+		let height = (this.try.mvc.main.header ? 25 : 0) + (this.try.mvc.main.footer ? 25 : 0);
+		this.try.numberContainer = HTML.create("div");
+		CSS.style(this.try.numberContainer, {"paddingTop": height / 2 + "px", "width": "100%", "height": "calc(100% - " + height + "px)", "lineHeight": "calc(100%)", "textAlign": "center", "fontSize": "55px"});
+		this.try.numberContainer.innerHTML = 0;
+		this.try.stage.appendChild(this.try.numberContainer);
+		
+		this.try.footer.innerHTML = "refresh";
+		CSS.style(this.try.footer, {"userSelect": "none", "cursor": "pointer"});
+		Events.on(this.try.footer, "click", event => this.try.mvc.controller.refreshClick());
+		this.try.stage.appendChild(this.try.footer);
+		
+		
 	}
 	
 	update(title, link) {
