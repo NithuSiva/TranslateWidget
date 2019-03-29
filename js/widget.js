@@ -51,15 +51,17 @@ class LeMondeView extends WidgetView {
 		this.bloc.setAttribute("type", "text");
 		this.bloc.setAttribute("value", "Entrer un mot");
 		this.stage.appendChild(this.bloc);
-		this.link = HH.create("a");
+		/*this.link = HH.create("a");
 		SS.style(this.link, {"fontSize": "10px", "textDecoration": "none"});
 		this.stage.appendChild(this.link);
+		*/
 	}
 	
-	update(title, link) {
+	/*update(title, link) {
 		this.link.innerHTML = title;
 		HH.attr(this.link, {"href": "https://www.lemonde.fr" + link, "target": "_blank"});
 	}
+	*/
 	
 }
 
@@ -74,7 +76,7 @@ class LeMondeController extends WidgetController {
 		
 	}
 	
-	async load() {
+	/*async load() {
 		let result = await this.mvc.main.dom("https://lemonde.fr"); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
@@ -82,5 +84,6 @@ class LeMondeController extends WidgetController {
 		let article = new xph().doc(dom).ctx(dom).craft('//*[@id="en-continu"]/div/ul/li[1]/a').firstResult; // find interesting things
 		this.mvc.view.update(article.textContent, article.getAttribute("href"));
 	}
+	*/
 	
 }
