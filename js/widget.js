@@ -47,6 +47,10 @@ class LeMondeView extends WidgetView {
 
 	draw() {
 		super.draw();
+		this.bloc = HTML.create("input");
+		this.bloc.setAttribute("type", "text");
+		this.bloc.setAttribute("value", "Entrer un mot");
+		this.stage.appendChild(this.bloc);
 		this.link = HH.create("a");
 		SS.style(this.link, {"fontSize": "10px", "textDecoration": "none"});
 		this.stage.appendChild(this.link);
