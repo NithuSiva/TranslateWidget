@@ -127,7 +127,7 @@ class TraductionController extends WidgetController {
 	}
     
 	
-	async load() {
+	/*async load() {
 		let result = await this.mvc.main.dom(this.lien); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
@@ -135,6 +135,7 @@ class TraductionController extends WidgetController {
 		let article = new xph().doc(dom).ctx(dom).craft('//*[@id="fren:4807"]/td[3]').firstResult; // find interesting things
 		this.mvc.view.update(article.textContent);
 	}
+	*/
 	
 	
 }
