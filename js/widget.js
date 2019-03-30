@@ -48,10 +48,6 @@ class TraductionView extends WidgetView {
 	draw() {
 		super.draw();
 		
-		this.link = HH.create("a");
-		SS.style(this.link, {"fontSize": "10px", "textDecoration": "none"});
-		this.stage.appendChild(this.link);
-
 		this.bloc = HH.create("input"); //creer un champ texte. id = "ChampTexte" size = "39" type = "text"
      	        this.bloc.setAttribute("id", "ChampTexte");
 		this.bloc.setAttribute("size", "39");
@@ -93,12 +89,15 @@ class TraductionView extends WidgetView {
 		SS.style(this.footer, {"userSelect": "none", "cursor": "pointer"});
 		Events.on(this.footer, "click", event => this.mvc.controller.valider());
 		this.stage.appendChild(this.footer);
+		
+		this.resultat = HH.create("a");
+		SS.style(this.resultat, {"fontSize": "10px", "textDecoration": "none"});
+		this.stage.appendChild(this.resultat);
         
 	}
 	
-	update(title, link) {
-		this.link.innerHTML = title;
-		HH.attr(this.link, {"href": "https://www.lemonde.fr" + link, "target": "_blank"});
+	update(title) {
+		this.resultat.innerHTML = title;
 	}
 	
 	
@@ -122,17 +121,18 @@ class TraductionController extends WidgetController {
         	this.baseChoix = langueBase.selectedIndex;  // variable qui contient le choix de la langue du mot
         	this.trad = document.getElementById("langueTrad").selectIndex;
         	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
-        	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );    
+        	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
+		this.lien = "https://www.linguee.fr/" + this.tableauLangue[this.baseChoix] + "-" + this.tableauLangue[this.tradChoix] + "/search?query=" + this.mot;
 	}
     
 	
 	async load() {
-		let result = await this.mvc.main.dom("https://lemonde.fr"); // load web page
+		let result = await this.mvc.main.dom(this.lien); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
-		let article = new xph().doc(dom).ctx(dom).craft('//*[@id="en-continu"]/div/ul/li[1]/a').firstResult; // find interesting things
-		this.mvc.view.update(article.textContent, article.getAttribute("href"));
+		let article = new xph().doc(dom).ctx(dom).craft('//*[@id="dictionary"]/div/div[1]/div/div/div/div/div/div[1]/h3/span[1]/a').firstResult; // find interesting things
+		this.mvc.view.update(article.textContent);
 	}
 	
 	
