@@ -115,23 +115,24 @@ class TraductionController extends WidgetController {
 	}
     
     	valider() {
-        	this.tableauLangue = ["Francais","Anglais"]; //liste contenant les langues.
+        	this.tableauLangue = ["fr","en"]; //liste contenant les langues.
 		this.mot = document.getElementById("ChampTexte").value; // variable contenant la valeur contenue dans le champ texte.
       	        this.base = document.getElementById("langueBase").selectIndex; 
         	this.baseChoix = langueBase.selectedIndex;  // variable qui contient le choix de la langue du mot
         	this.trad = document.getElementById("langueTrad").selectIndex;
         	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
-		this.lien = "https://www.linguee.fr/" + this.tableauLangue[this.baseChoix] + "-" + this.tableauLangue[this.tradChoix] + "/search?query=" + this.mot;
+		this.lien = "https://www.wordreference.com/" + this.tableauLangue[this.baseChoix] + this.tableauLangue[this.tradChoix] + "/" this.mot;
+		alert(this.lien);
 	}
     
 	
 	async load() {
-		let result = await this.mvc.main.dom("https://lemonde.fr"); // load web page
+		let result = await this.mvc.main.dom(this.lien); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
-		let article = new xph().doc(dom).ctx(dom).craft('//*[@id="en-continu"]/div/ul/li[1]/a/div[2]').firstResult; // find interesting things
+		let article = new xph().doc(dom).ctx(dom).craft('//*[@id="fren:4807"]/td[3]').firstResult; // find interesting things
 		this.mvc.view.update(article.textContent);
 	}
 	
