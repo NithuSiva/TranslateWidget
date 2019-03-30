@@ -96,7 +96,7 @@ class TraductionView extends WidgetView {
         
 	}
 	
-	update(title) {
+	update(title, link) {
 		this.resultat.innerHTML = title;
 	}
 	
@@ -132,7 +132,7 @@ class TraductionController extends WidgetController {
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
 		let article = new xph().doc(dom).ctx(dom).craft('//*[@id="dictionary"]/div/div[1]/div/div/div/div/div/div[1]/h3/span[1]/a').firstResult; // find interesting things
-		this.mvc.view.update(article.textContent);
+		this.mvc.view.update(article.textContent, article.getAttribute("href"));
 	}
 	
 	
