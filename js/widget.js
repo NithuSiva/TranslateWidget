@@ -47,6 +47,10 @@ class TraductionView extends WidgetView {
 
 	draw() {
 		super.draw();
+		
+		this.link = HH.create("a");
+		SS.style(this.link, {"fontSize": "10px", "textDecoration": "none"});
+		this.stage.appendChild(this.link);
 
 		this.bloc = HH.create("input"); //creer un champ texte. id = "ChampTexte" size = "39" type = "text"
      	        this.bloc.setAttribute("id", "ChampTexte");
