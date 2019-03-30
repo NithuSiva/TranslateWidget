@@ -96,7 +96,7 @@ class TraductionView extends WidgetView {
         
 	}
 	
-	update(title, link) {
+	update(title) {
 		this.resultat.innerHTML = title;
 	}
 	
@@ -127,12 +127,12 @@ class TraductionController extends WidgetController {
     
 	
 	async load() {
-		let result = await this.mvc.main.dom(this.lien); // load web page
+		let result = await this.mvc.main.dom("https://lemonde.fr"); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
-		let article = new xph().doc(dom).ctx(dom).craft('//*[@id="dictionary"]/div/div[1]/div/div/div/div/div/div[1]/h3/span[1]/a').firstResult; // find interesting things
-		this.mvc.view.update(article.textContent, article.getAttribute("href"));
+		let article = new xph().doc(dom).ctx(dom).craft('//*[@id="en-continu"]/div/ul/li[1]/a/div[2]').firstResult; // find interesting things
+		this.mvc.view.update(article.textContent);
 	}
 	
 	
