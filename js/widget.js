@@ -98,6 +98,7 @@ class TraductionView extends WidgetView {
 	
 	update(title) {
 		this.afficher.innerHTML = title;
+		//HH.attr(this.link, {"href": "https://www.lemonde.fr" + link, "target": "_blank"});
 	}
 	
 }
@@ -123,7 +124,7 @@ class TraductionController extends WidgetController {
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
 		this.lien = "https://www.wordreference.com/" + this.tableauLangue[this.baseChoix] + this.tableauLangue[this.tradChoix] + "/" + this.mot;
 		//this.mvc.controller.load();
-		alert(this.base);
+		
 		
 	}
 		
@@ -135,7 +136,7 @@ class TraductionController extends WidgetController {
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
-		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="colonneGauche"]/table/tbody/tr[1]/td/section/div/div[1]/div/div/h3/a').firstResult; // find interesting things
+		let article = new xph().doc(dom).ctx(dom).craft('//*[@id="colonneGauche"]/table/tbody/tr[1]/td/section/div/div[1]/div/div/h3/a').firstResult; // find interesting things
 		
 		this.mvc.view.update(article.textContent); 
 		
