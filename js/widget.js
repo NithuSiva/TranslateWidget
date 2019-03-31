@@ -122,15 +122,15 @@ class TraductionController extends WidgetController {
         	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
 		this.lien = "https://www.wordreference.com/" + this.tableauLangue[this.baseChoix] + this.tableauLangue[this.tradChoix] + "/" + this.mot;
-		this.mvc.controller.load(this.lien);
+		this.mvc.controller.load();
 		
 	}
 		
 
 	
-	async load(link) {
+	async load() {
 		
-		let result = await this.mvc.main.dom(link); // load web page
+		let result = await this.mvc.main.dom(this.lien); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
