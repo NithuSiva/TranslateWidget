@@ -124,8 +124,9 @@ class TraductionController extends WidgetController {
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
 		this.lien = "https://www.wordreference.com/" + this.tableauLangue[this.baseChoix] + this.tableauLangue[this.tradChoix] + "/" + this.mot;
 		//this.mvc.controller.load();
-		this.mvc.view.update(this.article.textContent);
 		load(this.lien);
+		this.mvc.view.update(this.article.textContent);
+		
 		
 	}
 		
