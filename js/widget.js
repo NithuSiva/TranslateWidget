@@ -124,7 +124,19 @@ class TraductionController extends WidgetController {
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
 		this.lien = "https://www.wordreference.com/" + this.tableauLangue[this.baseChoix] + this.tableauLangue[this.tradChoix] + "/" + this.mot;
 		//this.mvc.controller.load();
-		this.mvc.controller.load(this.lien);
+		
+		async function load() {
+		
+		let result = await this.mvc.main.dom(this.lien); // load web page
+		let domstr = _atob(result.response.dom); // decode result
+		let parser = new DOMParser(); // init dom parser
+		let dom = parser.parseFromString(domstr, "text/html"); // inject result
+		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="dictionary"]/div[1]/div[1]/div[1]/div/div/div/div/div[1]/h3/span[1]/a').firstResult; // find interesting things
+		this.mvc.view.update(this.article.textContent);
+		
+		//alert(article.textContent);
+			
+		}
 		
 		
 		
@@ -132,19 +144,7 @@ class TraductionController extends WidgetController {
 		
 
 	
-	async load(lien) {
-		
-		let result = await this.mvc.main.dom("lien"); // load web page
-		let domstr = _atob(result.response.dom); // decode result
-		let parser = new DOMParser(); // init dom parser
-		let dom = parser.parseFromString(domstr, "text/html"); // inject result
-		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="dictionary"]/div[1]/div[1]/div[1]/div/div/div/div/div[1]/h3/span[1]/a').firstResult; // find interesting things
-		this.mvc.view.update(this.article.textContent);
-		
-		
-		//alert(article.textContent);
-			
-		}
+	
     
 	
 	
