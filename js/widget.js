@@ -132,11 +132,11 @@ class TraductionController extends WidgetController {
 	
 	async load() {
 		
-		let result = await this.mvc.main.dom("https://www.wordreference.com/fren/bonjour"); // load web page
+		let result = await this.mvc.main.dom("https://www.linguee.fr/francais-anglais/search?source=auto&query=maison"); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
-		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="fren:895"]/td[3]').firstResult; // find interesting things
+		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="dictionary"]/div[1]/div[1]/div[1]/div/div/div/div/div[1]/h3/span[1]/a').firstResult; // find interesting things
 		
 		this.mvc.view.update(this.article.textContent); 
 		
