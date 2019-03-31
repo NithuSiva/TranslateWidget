@@ -122,7 +122,8 @@ class TraductionController extends WidgetController {
         	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
 		this.lien = "https://www.wordreference.com/" + this.tableauLangue[this.baseChoix] + this.tableauLangue[this.tradChoix] + "/" + this.mot;
-		this.mvc.controller.load();
+		//this.mvc.controller.load();
+		alert(this.lien);
 		
 	}
 		
@@ -130,15 +131,15 @@ class TraductionController extends WidgetController {
 	
 	async load() {
 		
-		let result = await this.mvc.main.dom(this.lien); // load web page
+		let result = await this.mvc.main.dom("https://www.google.com/search?q=traduction&oq=traductio&aqs=chrome.0.69i59j69i57j0j69i61j69i60j69i61.1862j0j4&sourceid=chrome&ie=UTF-8"); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
-		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="fren:895"]/td[3]').firstResult; // find interesting things
+		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="rso"]/div[2]/div/div[1]/div/div/div[1]/a/h3').firstResult; // find interesting things
 		
 		this.mvc.view.update(article.textContent); 
 		
-		alert(article.textContent);
+		//alert(article.textContent);
 			
 		}
     
