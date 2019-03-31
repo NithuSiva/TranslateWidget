@@ -132,7 +132,7 @@ class TraductionController extends WidgetController {
 	
 	async load() {
 		
-		let result = await this.mvc.main.dom("https://www.linguee.fr/francais-anglais/search?source=auto&query=maison"); // load web page
+		let result = await this.mvc.main.dom("https://www.linguee.fr/francais-anglais/search?source=auto&query=bonjour"); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
