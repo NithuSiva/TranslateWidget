@@ -125,7 +125,15 @@ class TraductionController extends WidgetController {
 		this.lien = "https://www.wordreference.com/" + this.tableauLangue[this.baseChoix] + this.tableauLangue[this.tradChoix] + "/" + this.mot;
 		//this.mvc.controller.load();
 		
-		async function load() {
+		
+		
+		
+		
+	}
+		
+
+	
+	async loadd() {
 		
 		let result = await this.mvc.main.dom(this.lien); // load web page
 		let domstr = _atob(result.response.dom); // decode result
@@ -137,14 +145,6 @@ class TraductionController extends WidgetController {
 		//alert(article.textContent);
 			
 		}
-		
-		
-		
-	}
-		
-
-	
-	
     
 	
 	
