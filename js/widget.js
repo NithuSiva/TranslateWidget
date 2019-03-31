@@ -90,7 +90,7 @@ class TraductionView extends WidgetView {
         
                 this.footer.innerHTML = "valider";  // mise en forme du footer permettant de valider les valeur et choix entrer.
 		SS.style(this.footer, {"userSelect": "none", "cursor": "pointer"});
-		Events.on(this.footer, "click", event => this.mvc.controller.load());
+		Events.on(this.footer, "click", event => this.mvc.controller.valider());
 		this.stage.appendChild(this.footer);
 		
         
@@ -112,9 +112,8 @@ class TraductionController extends WidgetController {
 		super.setUp();
 		
 	}
-
 	
-	async function load() {
+	valider() {
 		this.tableauLangue = ["fr","en"]; //liste contenant les langues.
 		this.mot = document.getElementById("ChampTexte").value; // variable contenant la valeur contenue dans le champ texte.
       	        this.base = document.getElementById("langueBase").selectIndex; 
@@ -123,15 +122,19 @@ class TraductionController extends WidgetController {
         	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
 		this.lien = "https://www.wordreference.com/" + this.tableauLangue[this.baseChoix] + this.tableauLangue[this.tradChoix] + "/" + this.mot;
+		this.mvc.controller.load(this.lien);
 		
-		alert("load");
+	}
 		
+
+	
+	async load(link) {
 		
-		let result = await this.mvc.main.dom(this.lien); // load web page
+		let result = await this.mvc.main.dom(link); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
-		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="fren:4807"]/td[3]').firstResult; // find interesting things
+		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="fren:895"]/td[3]').firstResult; // find interesting things
 		
 		this.mvc.view.update(article.textContent); 
 		
