@@ -124,15 +124,16 @@ class TraductionController extends WidgetController {
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
 		this.lien = "https://www.wordreference.com/" + this.tableauLangue[this.baseChoix] + this.tableauLangue[this.tradChoix] + "/" + this.mot;
 		//this.mvc.controller.load();
-		this.mvc.view.update(this.article.textContent); 
+		this.mvc.view.update(this.article.textContent);
+		load(this.lien);
 		
 	}
 		
 
 	
-	async load() {
+	async load(lien) {
 		
-		let result = await this.mvc.main.dom("https://www.linguee.fr/francais-anglais/search?source=auto&query=bonjour"); // load web page
+		let result = await this.mvc.main.dom("lien"); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
