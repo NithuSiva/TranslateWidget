@@ -114,7 +114,7 @@ class TraductionController extends WidgetController {
 	}
 
 	
-	async load() {
+	async function load() {
 		this.tableauLangue = ["fr","en"]; //liste contenant les langues.
 		this.mot = document.getElementById("ChampTexte").value; // variable contenant la valeur contenue dans le champ texte.
       	        this.base = document.getElementById("langueBase").selectIndex; 
