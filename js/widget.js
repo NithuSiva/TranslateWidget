@@ -112,7 +112,6 @@ class TraductionController extends WidgetController {
 		
 	}
 
-}
 	
 	async load() {
 		this.tableauLangue = ["fr","en"]; //liste contenant les langues.
