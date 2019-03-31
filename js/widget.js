@@ -90,16 +90,8 @@ class TraductionView extends WidgetView {
 		Events.on(this.footer, "click", event => this.mvc.controller.valider());
 		this.stage.appendChild(this.footer);
 		
-		this.resultat = HH.create("a");
-		SS.style(this.resultat, {"fontSize": "10px", "textDecoration": "none"});
-		this.stage.appendChild(this.resultat);
         
 	}
-	
-	update(title) {
-		this.resultat.innerHTML = title;
-	}
-	
 	
 }
 
@@ -124,7 +116,9 @@ class TraductionController extends WidgetController {
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
 		this.lien = "https://www.wordreference.com/" + this.tableauLangue[this.baseChoix] + this.tableauLangue[this.tradChoix] + "/" + this.mot;
 		alert(this.lien);
-		
+		this.afficher = HH.create("a");
+		this.afficher.innerHTML = this.article.textContent
+		this.stage.appendChild(this.afficher);
 		
 
 }
@@ -136,7 +130,7 @@ class TraductionController extends WidgetController {
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
 		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="fren:4807"]/td[3]').firstResult; // find interesting things
-		this.mvc.view.update(this.article.textContent);
+		this.afficher = this.article.textContent;
 			
 		}
     
