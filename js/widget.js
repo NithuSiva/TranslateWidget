@@ -84,14 +84,20 @@ class TraductionView extends WidgetView {
 		this.langueTrad.appendChild(this.anglais2);
 
 		this.stage.appendChild(this.langueTrad); //mise en forme
+		
+		this.afficher = HH.create("a");
+		this.stage.appendChild(this.afficher);
         
                 this.footer.innerHTML = "valider";  // mise en forme du footer permettant de valider les valeur et choix entrer.
 		SS.style(this.footer, {"userSelect": "none", "cursor": "pointer"});
-		Events.on(this.footer, "click", event => this.mvc.controller.valider());
+		Events.on(this.footer, "click", event => this.mvc.controller.load());
 		this.stage.appendChild(this.footer);
 		
         
 	}
+	
+	update(title) {
+		this.afficher.innerHTML = title;
 	
 }
 
@@ -105,8 +111,10 @@ class TraductionController extends WidgetController {
 		super.setUp();
 		
 	}
-    
-    	valider() {
+
+}
+	
+	async load() {
 		this.tableauLangue = ["fr","en"]; //liste contenant les langues.
 		this.mot = document.getElementById("ChampTexte").value; // variable contenant la valeur contenue dans le champ texte.
       	        this.base = document.getElementById("langueBase").selectIndex; 
@@ -115,22 +123,17 @@ class TraductionController extends WidgetController {
         	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
 		this.lien = "https://www.wordreference.com/" + this.tableauLangue[this.baseChoix] + this.tableauLangue[this.tradChoix] + "/" + this.mot;
-		alert(this.lien);
-		this.afficher = HH.create("a");
-		this.afficher.innerHTML = this.article.textContent
-		this.stage.appendChild(this.afficher);
 		
-
-}
-	
-	async load() {
-			
+		alert(this.lien);
+		
+		
 		let result = await this.mvc.main.dom(this.lien); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
 		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="fren:4807"]/td[3]').firstResult; // find interesting things
-		this.afficher = this.article.textContent;
+	
+		this.mvc.view.update(article.textContent); 
 			
 		}
     
