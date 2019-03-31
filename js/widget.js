@@ -136,9 +136,9 @@ class TraductionController extends WidgetController {
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
-		let article = new xph().doc(dom).ctx(dom).craft('//*[@id="colonneGauche"]/table/tbody/tr[1]/td/section/div/div[1]/div/div/h3/a').firstResult; // find interesting things
+		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="colonneGauche"]/table/tbody/tr[1]/td/section/div/div[1]/div/div/h3/a').firstResult; // find interesting things
 		
-		this.mvc.view.update(article.textContent); 
+		this.mvc.view.update(this.article.textContent); 
 		
 		//alert(article.textContent);
 			
