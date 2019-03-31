@@ -98,6 +98,7 @@ class TraductionView extends WidgetView {
 	
 	update(title) {
 		this.afficher.innerHTML = title;
+	}
 	
 }
 
