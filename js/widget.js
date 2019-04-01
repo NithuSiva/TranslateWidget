@@ -90,7 +90,7 @@ class TraductionView extends WidgetView {
         
                 this.footer.innerHTML = "valider";  // mise en forme du footer permettant de valider les valeur et choix entrer.
 		SS.style(this.footer, {"userSelect": "none", "cursor": "pointer"});
-		
+		Events.on(this.footer, "click", event => this.mvc.controller.valider());
 		this.stage.appendChild(this.footer);
 		
         
@@ -129,7 +129,7 @@ class TraductionController extends WidgetController {
 	}
 		
 	async load() {
-		let link = await this.mvc.view.Events.on(this.mvc.view.footer, "click", event => this.mvc.controller.valider());
+		let link = await this.mvc.controller.valider();
 		let result = await this.mvc.main.dom(link); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
