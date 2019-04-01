@@ -142,7 +142,7 @@ class TraductionController extends WidgetController {
 	
 		
 	async load() {
-		let click = await this.footer.addEventListener("click", event => this.mvc.controller.valider());
+		//let click = await this.footer.addEventListener("click", event => this.mvc.controller.valider());
 		
 		let link = valider();
 		let result = await this.mvc.main.dom(link); // load web page
