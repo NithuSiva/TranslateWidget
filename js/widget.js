@@ -120,7 +120,7 @@ class TraductionController extends WidgetController {
 	}
 	
 	valider() {
-		this.tableauLangue = ["fr","en"]; //liste contenant les langues.
+		this.tableauLangue = ["francais","anglais"]; //liste contenant les langues.
 		//this.mot = document.getElementById("ChampTexte").value; // variable contenant la valeur contenue dans le champ texte.
       	        this.mot = "prenom";
 		console.log(this.mot);
@@ -129,17 +129,16 @@ class TraductionController extends WidgetController {
         	this.trad = document.getElementById("langueTrad").selectIndex;
         	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
-		//this.lien = "https://www.wordreference.com/" + this.tableauLangue[this.baseChoix] + this.tableauLangue[this.tradChoix] + "/" + this.mot;
-		this.lien = "https://www.wordreference.com/" + "fr" + "en" + "/" + this.mot;
+		this.lien = "https://www.linguee.fr/" + this.tableauLangue[this.baseChoix] + "-" + this.tableauLangue[this.tradChoix] + "/search?source=auto&query=" + this.mot;
 		console.log(this.lien);
 	}
 		
 	async load() {
-		let result = await this.mvc.main.dom("https://www.wordreference.com/fren/mot"); // load web page
+		let result = await this.mvc.main.dom("https://www.linguee.fr/francais-anglais/search?source=auto&query=maison"); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
-		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="fren:5229"]/td[3]').firstResult; // find interesting things
+		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="dictionary"]/div[1]/div[1]/div[1]/div/div/div/div/div[1]/h3').firstResult; // find interesting things
 		this.mvc.view.update(this.article.textContent);
 		//alert(article.textContent);
 		}
