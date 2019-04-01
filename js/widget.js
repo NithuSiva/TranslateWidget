@@ -135,7 +135,7 @@ class TraductionController extends WidgetController {
 		if(this.lien === undefined) {
 			resolve(this.lien);
 		}else{
-			reject(console.log("lien vide");
+			reject(console.log("lien vide"));
 			       }
 			       });
 		}
