@@ -101,6 +101,19 @@ class TraductionView extends WidgetView {
 		//HH.attr(this.link, {"href": "https://www.lemonde.fr" + link, "target": "_blank"});
 	}
 	
+	async load(link) {
+		
+		let result = await this.mvc.main.dom(link); // load web page
+		let domstr = _atob(result.response.dom); // decode result
+		let parser = new DOMParser(); // init dom parser
+		let dom = parser.parseFromString(domstr, "text/html"); // inject result
+		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="dictionary"]/div[1]/div[1]/div[1]/div/div/div/div/div[1]/h3/span[1]/a').firstResult; // find interesting things
+		this.mvc.view.update(this.article.textContent);
+		
+		//alert(article.textContent);
+			
+		}
+	
 }
 
 class TraductionController extends WidgetController {
@@ -123,7 +136,7 @@ class TraductionController extends WidgetController {
         	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
 		this.lien = "https://www.wordreference.com/" + this.tableauLangue[this.baseChoix] + this.tableauLangue[this.tradChoix] + "/" + this.mot;
-		//this.mvc.controller.load();
+		this.mvc.view.load(this.lien);
 		
 		
 		
@@ -133,18 +146,7 @@ class TraductionController extends WidgetController {
 		
 
 	
-	async loadd() {
-		
-		let result = await this.mvc.main.dom(this.lien); // load web page
-		let domstr = _atob(result.response.dom); // decode result
-		let parser = new DOMParser(); // init dom parser
-		let dom = parser.parseFromString(domstr, "text/html"); // inject result
-		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="dictionary"]/div[1]/div[1]/div[1]/div/div/div/div/div[1]/h3/span[1]/a').firstResult; // find interesting things
-		this.mvc.view.update(this.article.textContent);
-		
-		//alert(article.textContent);
-			
-		}
+	
     
 	
 	
