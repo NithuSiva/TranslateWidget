@@ -131,7 +131,7 @@ class TraductionController extends WidgetController {
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
 		//this.lien = "https://www.wordreference.com/" + this.tableauLangue[this.baseChoix] + this.tableauLangue[this.tradChoix] + "/" + this.mot;
 		this.lien = "https://www.wordreference.com/" + "fr" + "en" + "/" + this.mot;
-		return new Promise(function (resolve, reject) {
+		return new Promise(function (resolve, reject) => {
 		if(this.lien === undefined) {
 			resolve(this.lien);
 		}else{
