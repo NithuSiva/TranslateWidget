@@ -139,7 +139,7 @@ class TraductionController extends WidgetController {
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
-		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="fren:2809"]/td[3]').firstResult; // find interesting things
+		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="fren:5229"]/td[3]').firstResult; // find interesting things
 		this.mvc.view.update(this.article.textContent);
 		//alert(article.textContent);
 		}
