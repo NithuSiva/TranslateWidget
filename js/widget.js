@@ -117,6 +117,7 @@ class TraductionController extends WidgetController {
 	}
 	
 	valider() {
+		return new Promise(function (resolve, reject) {
 		this.tableauLangue = ["fr","en"]; //liste contenant les langues.
 		this.mot = document.getElementById("ChampTexte").value; // variable contenant la valeur contenue dans le champ texte.
       	        console.log(this.mot);
@@ -126,7 +127,11 @@ class TraductionController extends WidgetController {
         	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
 		this.lien = "https://www.wordreference.com/" + this.tableauLangue[this.baseChoix] + this.tableauLangue[this.tradChoix] + "/" + this.mot;
-		async load() {
+		resolve(this.lien);
+		});
+	}
+		
+	async load() {
 		let link = await this.mvc.controller.valider();
 		let result = await this.mvc.main.dom(link); // load web page
 		let domstr = _atob(result.response.dom); // decode result
@@ -136,9 +141,6 @@ class TraductionController extends WidgetController {
 		this.mvc.view.update(this.article.textContent);
 		//alert(article.textContent);
 		}
-	}
-		
-	
 		
 		
 		
