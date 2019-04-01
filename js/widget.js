@@ -130,7 +130,7 @@ class TraductionController extends WidgetController {
         	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
 		//this.lien = "https://www.wordreference.com/" + this.tableauLangue[this.baseChoix] + this.tableauLangue[this.tradChoix] + "/" + this.mot;
-		this.lien = "https://www.wordreference.com/" + fr + en + "/" + this.mot;
+		this.lien = "https://www.wordreference.com/" + "fr" + "en" + "/" + this.mot;
 		return this.lien;
 	}
 	
