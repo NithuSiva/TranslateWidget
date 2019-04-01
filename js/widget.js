@@ -90,7 +90,7 @@ class TraductionView extends WidgetView {
         
                 this.footer.innerHTML = "valider";  // mise en forme du footer permettant de valider les valeur et choix entrer.
 		SS.style(this.footer, {"userSelect": "none", "cursor": "pointer"});
-		this.click = this.footer.addEventListener("click", event => this.mvc.controller.valider());
+		
 		// Events.on(this.footer, "click", event => this.mvc.controller.valider());
 		this.stage.appendChild(this.footer);
 		
@@ -131,11 +131,18 @@ class TraductionController extends WidgetController {
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
 		//this.lien = "https://www.wordreference.com/" + this.tableauLangue[this.baseChoix] + this.tableauLangue[this.tradChoix] + "/" + this.mot;
 		this.lien = "https://www.wordreference.com/" + "fr" + "en" + "/" + this.mot;
-		return this.lien;
-	}
+		return new Promise(function (resolve, reject) {
+		if(this.lien === undefined) {
+			resolve(this.lien);
+		}else{
+			reject(console.log("lien vide");
+			       }
+			       });
+		}
 	
 		
 	async load() {
+		let click = await this.footer.addEventListener("click", event => this.mvc.controller.valider());
 		
 		let link = valider();
 		let result = await this.mvc.main.dom(link); // load web page
