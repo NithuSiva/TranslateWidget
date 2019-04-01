@@ -129,7 +129,7 @@ class TraductionController extends WidgetController {
 	}
 		
 	async load() {
-		let link = await this.mvc.controller.valider();
+		let link = await valider();
 		let result = await this.mvc.main.dom(link); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
