@@ -90,7 +90,7 @@ class TraductionView extends WidgetView {
         
                 this.footer.innerHTML = "valider";  // mise en forme du footer permettant de valider les valeur et choix entrer.
 		SS.style(this.footer, {"userSelect": "none", "cursor": "pointer"});
-		
+		this.footer.addEventListener("click", event => this.mvc.controller.valider())
 		// Events.on(this.footer, "click", event => this.mvc.controller.valider());
 		this.stage.appendChild(this.footer);
 		
@@ -131,21 +131,11 @@ class TraductionController extends WidgetController {
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
 		//this.lien = "https://www.wordreference.com/" + this.tableauLangue[this.baseChoix] + this.tableauLangue[this.tradChoix] + "/" + this.mot;
 		this.lien = "https://www.wordreference.com/" + "fr" + "en" + "/" + this.mot;
-		return new Promise((resolve, reject) => {
-		if(this.lien === undefined) {
-			resolve(this.lien);
-		}else{
-			reject(console.log("lien vide"));
-			       }
-			       });
-		}
-	
+		console.log(this.lien);
+	}
 		
 	async load() {
-		//let click = await this.footer.addEventListener("click", event => this.mvc.controller.valider());
-		
-		let link = await this.mvc.controller.valider();
-		let result = await this.mvc.main.dom(link); // load web page
+		let result = await this.mvc.main.dom("https://www.wordreference.com/fren/mot"); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
