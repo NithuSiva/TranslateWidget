@@ -92,7 +92,7 @@ class TraductionView extends WidgetView {
         
                 this.footer.innerHTML = "valider";  // mise en forme du footer permettant de valider les valeur et choix entrer.
 		SS.style(this.footer, {"userSelect": "none", "cursor": "pointer"});
-		this.click = this.footer.addEventListener("click", event => this.mvc.controller.valider());
+		this.click = this.footer.addEventListener("click", event => this.mvc.view.select());
 		// Events.on(this.footer, "click", event => this.mvc.controller.valider());
 		this.stage.appendChild(this.footer);
 		
