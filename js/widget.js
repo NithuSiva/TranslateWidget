@@ -54,42 +54,6 @@ class TraductionView extends WidgetView {
 		this.bloc.setAttribute("type", "text");
 		this.stage.appendChild(this.bloc);
 		
-		
-		/*this.langueBase = HH.create("select"); //creer une liste deroulante pour la langue du mot. id = "langueBase"
-		this.langueBase.setAttribute("id", "langueBase");
-
-
-		this.francais1 = HH.create("option"); //contenue de la liste "langueBase"
-		this.francais1.innerHTML = "Francais";
-
-		this.langueBase.appendChild(this.francais1); 
-
-		this.anglais1 = HH.create("option"); //contenue de la liste "langueBase"
-		this.anglais1.innerHTML = "Anglais";
-
-		this.langueBase.appendChild(this.anglais1); 
-
-		this.stage.appendChild(this.langueBase); //mise en forme
-        
-                this.langueTrad = HH.create("select"); //creer une liste deroulante pour la langue du mot a traduire. id = "langueTrad"
-                this.langueTrad.setAttribute("id", "langueTrad");
-        
-                this.francais2 = HH.create("option"); //contenue de la liste "langueTrad"
-		this.francais2.innerHTML = "Francais";
-
-		this.langueTrad.appendChild(this.francais2); 
-
-		this.anglais2 = HH.create("option"); //contenue de la liste "langueTrad"
-		this.anglais2.innerHTML = "Anglais";
-
-		this.langueTrad.appendChild(this.anglais2);
-
-		this.stage.appendChild(this.langueTrad); //mise en forme
-		*/
-		
-		this.afficher = HH.create("a");
-		this.stage.appendChild(this.afficher);
-		
 		this.mvc.controller.select();
         
                 this.footer.innerHTML = "valider";  // mise en forme du footer permettant de valider les valeur et choix entrer.
@@ -127,8 +91,8 @@ class TraductionController extends WidgetController {
 		
 	}
 	
-	select() {
-		this.tableauLangue = ["francais","anglais"]; //liste contenant les langues.
+	select() { //metode qui creer des liste déroulante 
+		this.tableauLangue = ["francais","anglais","allemand","espagnol","portugais","italien"]; //liste contenant les langues.
 		this.tableauLangueTaille = this.tableauLangue.length;
 		var i = 0;
 		this.langueDeBase = document.createElement("select");
