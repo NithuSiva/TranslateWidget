@@ -55,7 +55,7 @@ class TraductionView extends WidgetView {
 		this.stage.appendChild(this.bloc);
 		
 		
-		this.langueBase = HH.create("select"); //creer une liste deroulante pour la langue du mot. id = "langueBase"
+		/*this.langueBase = HH.create("select"); //creer une liste deroulante pour la langue du mot. id = "langueBase"
 		this.langueBase.setAttribute("id", "langueBase");
 
 
@@ -85,6 +85,7 @@ class TraductionView extends WidgetView {
 		this.langueTrad.appendChild(this.anglais2);
 
 		this.stage.appendChild(this.langueTrad); //mise en forme
+		*/
 		
 		this.afficher = HH.create("a");
 		this.stage.appendChild(this.afficher);
