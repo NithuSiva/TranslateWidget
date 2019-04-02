@@ -9,7 +9,7 @@ class TraductionWidget extends Widget {
 		this.header = true;
 		this.footer = true;
 		this.sizeX = 2;
-		this.sizeY = 1;
+		this.sizeY = 0.8;
 		this.radius = 15;
 	}
 	
