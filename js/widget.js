@@ -121,8 +121,8 @@ class TraductionController extends WidgetController {
 	
 	valider() {
 		this.tableauLangue = ["francais","anglais"]; //liste contenant les langues.
-		//this.mot = document.getElementById("ChampTexte").value; // variable contenant la valeur contenue dans le champ texte.
-      	        this.mot = "prenom";
+		this.mot = document.getElementById("ChampTexte").value; // variable contenant la valeur contenue dans le champ texte.
+      	       // this.mot = "prenom";
 		console.log(this.mot);
 		this.base = document.getElementById("langueBase").selectIndex; 
         	this.baseChoix = langueBase.selectedIndex;  // variable qui contient le choix de la langue du mot
