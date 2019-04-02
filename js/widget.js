@@ -90,7 +90,7 @@ class TraductionView extends WidgetView {
         
                 this.footer.innerHTML = "valider";  // mise en forme du footer permettant de valider les valeur et choix entrer.
 		SS.style(this.footer, {"userSelect": "none", "cursor": "pointer"});
-		this.footer.addEventListener("click", event => this.mvc.controller.valider())
+		this.click = this.footer.addEventListener("click", event => this.mvc.controller.valider());
 		// Events.on(this.footer, "click", event => this.mvc.controller.valider());
 		this.stage.appendChild(this.footer);
 		
@@ -130,10 +130,12 @@ class TraductionController extends WidgetController {
         	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
 		this.lien = "https://www.linguee.fr/" + this.tableauLangue[this.baseChoix] + "-" + this.tableauLangue[this.tradChoix] + "/search?source=auto&query=" + this.mot;
+		return this.lien;
 		console.log(this.lien);
 	}
 		
 	async load() {
+		let link = await this.click;
 		let result = await this.mvc.main.dom("https://www.linguee.fr/francais-anglais/search?source=auto&query=maison"); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
