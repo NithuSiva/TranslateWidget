@@ -101,10 +101,11 @@ class TraductionView extends WidgetView {
         
 	}
 	
-	this.tableauLangue = ["francais","anglais"]; //liste contenant les langues.
-	this.tableauLangueTaille = this.tableauLangue.length;
+	
 
 	select(){
+		this.tableauLangue = ["francais","anglais"]; //liste contenant les langues.
+		this.tableauLangueTaille = this.tableauLangue.length;
 		var i = 0;
 		this.langueDeBase = document.createElement("select");
      	        this.langueDeTraduction = document.createElement("select");
@@ -122,7 +123,8 @@ class TraductionView extends WidgetView {
      		 	 }
 	 	this.stage.appendChild(langueDeBase);
    	   	this.stage.appendChild(langueDeTraduction);
-}
+	}
+	
 	select();
 
 	
