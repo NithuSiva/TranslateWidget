@@ -89,6 +89,8 @@ class TraductionView extends WidgetView {
 		
 		this.afficher = HH.create("a");
 		this.stage.appendChild(this.afficher);
+		
+		this.mvc.controller.select();
         
                 this.footer.innerHTML = "valider";  // mise en forme du footer permettant de valider les valeur et choix entrer.
 		SS.style(this.footer, {"userSelect": "none", "cursor": "pointer"});
@@ -97,25 +99,6 @@ class TraductionView extends WidgetView {
 		this.stage.appendChild(this.footer);
 		
 		
-		this.tableauLangue = ["francais","anglais"]; //liste contenant les langues.
-		this.tableauLangueTaille = this.tableauLangue.length;
-		var i = 0;
-		this.langueDeBase = document.createElement("select");
-     	        this.langueDeTraduction = document.createElement("select");
-		this.langueDeBase.setAttribute("id", "langueBase");
-		this.langueDeTraduction.setAttribute("id", "langueTrad");
-		for(i=0;i<this.tableauLangueTaille;i++){
-			var langue = document.createElement("option");
-			langue.innerHTML = this.tableauLangue[i];
-			this.langueDeBase.appendChild(langue);
-       			 }
-       	 	for(i=0;i<this.tableauLangueTaille;i++){
-			var langue = document.createElement("option");
-			langue.innerHTML = this.tableauLangue[i];
-			this.langueDeTraduction.appendChild(langue);
-     		 	 }
-	 	this.stage.appendChild(langueDeBase);
-   	   	this.stage.appendChild(langueDeTraduction);
         
 	}
 	
@@ -143,6 +126,28 @@ class TraductionController extends WidgetController {
 		super.setUp();
 		
 	}
+	
+	select() {
+		this.tableauLangue = ["francais","anglais"]; //liste contenant les langues.
+		this.tableauLangueTaille = this.tableauLangue.length;
+		var i = 0;
+		this.langueDeBase = document.createElement("select");
+     	        this.langueDeTraduction = document.createElement("select");
+		this.langueDeBase.setAttribute("id", "langueBase");
+		this.langueDeTraduction.setAttribute("id", "langueTrad");
+		for(i=0;i<this.tableauLangueTaille;i++){
+			var langue = document.createElement("option");
+			langue.innerHTML = this.tableauLangue[i];
+			this.langueDeBase.appendChild(langue);
+       			 }
+       	 	for(i=0;i<this.tableauLangueTaille;i++){
+			var langue = document.createElement("option");
+			langue.innerHTML = this.tableauLangue[i];
+			this.langueDeTraduction.appendChild(langue);
+     		 	 }
+	 	this.stage.appendChild(langueDeBase);
+   	   	this.stage.appendChild(langueDeTraduction);
+		}
 	
 	valider() {
 		
