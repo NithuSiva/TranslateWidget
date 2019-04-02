@@ -92,18 +92,11 @@ class TraductionView extends WidgetView {
         
                 this.footer.innerHTML = "valider";  // mise en forme du footer permettant de valider les valeur et choix entrer.
 		SS.style(this.footer, {"userSelect": "none", "cursor": "pointer"});
-		this.click = this.footer.addEventListener("click", event => this.mvc.view.select());
+		this.click = this.footer.addEventListener("click", event => this.mvc.controller.valider());
 		// Events.on(this.footer, "click", event => this.mvc.controller.valider());
 		this.stage.appendChild(this.footer);
 		
 		
-		
-        
-	}
-	
-	
-
-	select(){
 		this.tableauLangue = ["francais","anglais"]; //liste contenant les langues.
 		this.tableauLangueTaille = this.tableauLangue.length;
 		var i = 0;
@@ -123,7 +116,12 @@ class TraductionView extends WidgetView {
      		 	 }
 	 	this.stage.appendChild(langueDeBase);
    	   	this.stage.appendChild(langueDeTraduction);
+        
 	}
+	
+	
+
+	
 
 	
 	update(title) {
