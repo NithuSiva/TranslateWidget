@@ -145,8 +145,8 @@ class TraductionController extends WidgetController {
 			langue.innerHTML = this.tableauLangue[i];
 			this.langueDeTraduction.appendChild(langue);
      		 	 }
-	 	this.stage.appendChild(langueDeBase);
-   	   	this.stage.appendChild(langueDeTraduction);
+	 	this.mvc.view.stage.appendChild(langueDeBase);
+   	   	this.mvc.view.stage.appendChild(langueDeTraduction);
 		}
 	
 	valider() {
