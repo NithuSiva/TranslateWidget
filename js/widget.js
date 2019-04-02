@@ -124,8 +124,6 @@ class TraductionView extends WidgetView {
 	 	this.stage.appendChild(langueDeBase);
    	   	this.stage.appendChild(langueDeTraduction);
 	}
-	
-	select();
 
 	
 	update(title) {
