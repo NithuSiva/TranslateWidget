@@ -53,7 +53,8 @@ class TraductionView extends WidgetView {
 		this.bloc.setAttribute("size", "39");
 		this.bloc.setAttribute("type", "text");
 		this.stage.appendChild(this.bloc);
-
+		
+		
 		this.langueBase = HH.create("select"); //creer une liste deroulante pour la langue du mot. id = "langueBase"
 		this.langueBase.setAttribute("id", "langueBase");
 
@@ -99,6 +100,31 @@ class TraductionView extends WidgetView {
         
 	}
 	
+	this.tableauLangue = ["francais","anglais"]; //liste contenant les langues.
+	this.tableauLangueTaille = this.tableauLangue.length;
+
+	select(){
+		var i = 0;
+		this.langueDeBase = document.createElement("select");
+     	        this.langueDeTraduction = document.createElement("select");
+		this.langueDeBase.setAttribute("id", "langueBase");
+		this.langueDeTraduction.setAttribute("id", "langueTrad");
+		for(i=0;i<this.tableauLangueTaille;i++){
+			var langue = document.createElement("option");
+			langue.innerHTML = this.tableauLangue[i];
+			this.langueDeBase.appendChild(langue);
+       			 }
+       	 	for(i=0;i<this.tableauLangueTaille;i++){
+			var langue = document.createElement("option");
+			langue.innerHTML = this.tableauLangue[i];
+			this.langueDeTraduction.appendChild(langue);
+     		 	 }
+	 	this.stage.appendChild(langueDeBase);
+   	   	this.stage.appendChild(langueDeTraduction);
+}
+	select();
+
+	
 	update(title) {
 		this.afficher.innerHTML = title;
 		//HH.attr(this.link, {"href": "https://www.lemonde.fr" + link, "target": "_blank"});
@@ -120,7 +146,7 @@ class TraductionController extends WidgetController {
 	}
 	
 	valider() {
-		this.tableauLangue = ["francais","anglais"]; //liste contenant les langues.
+		
 		this.mot = document.getElementById("ChampTexte").value; // variable contenant la valeur contenue dans le champ texte.
       	       // this.mot = "prenom";
 		console.log(this.mot);
