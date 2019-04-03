@@ -15,8 +15,8 @@ class TraductionWidget extends Widget {
 	
 	async ready() {
 		super.ready();
-		
-		
+		await this.controller.valider();
+		this.controller.load();
 	}
 	
 }
@@ -130,7 +130,7 @@ class TraductionController extends WidgetController {
 		this.lien = "https://www.linguee.fr/" + this.tableauLangue[this.baseChoix] + "-" + this.tableauLangue[this.tradChoix] + "/search?source=auto&query=" + this.mot;
 		//return this.lien;
 		console.log(this.lien);
-		this.controller.load(this.lien);
+		
 	}
 		
 	async load(link) {
