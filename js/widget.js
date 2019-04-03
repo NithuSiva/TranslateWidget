@@ -15,8 +15,8 @@ class TraductionWidget extends Widget {
 	
 	async ready() {
 		super.ready();
-		await this.controller.valider();
-		this.controller.load();
+		//this.controller.load();
+		
 	}
 	
 }
@@ -117,7 +117,7 @@ class TraductionController extends WidgetController {
 		
 		}
 	
-	valider() {
+	async valider() {
 		
 		this.mot = document.getElementById("ChampTexte").value; // variable contenant la valeur contenue dans le champ texte.
       	       // this.mot = "prenom";
@@ -128,13 +128,12 @@ class TraductionController extends WidgetController {
         	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
 		this.lien = "https://www.linguee.fr/" + this.tableauLangue[this.baseChoix] + "-" + this.tableauLangue[this.tradChoix] + "/search?source=auto&query=" + this.mot;
-		//return this.lien;
 		console.log(this.lien);
 		
-	}
+	
 		
-	async load(link) {
-		let result = await this.mvc.main.dom(link); // load web page
+	//async load(link) {
+		let result = await this.mvc.main.dom(this.lien); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
@@ -142,18 +141,5 @@ class TraductionController extends WidgetController {
 		this.mvc.view.update(this.article.textContent);
 		//alert(article.textContent);
 		}
-		
-		
-		
-	
-		
-
-	
-	
-    
-	
-	
-	
-	
 	
 }
