@@ -95,7 +95,7 @@ class TraductionController extends WidgetController {
 	}
 	
 	select() { //metode qui creer des liste déroulante 
-		this.tableauLangue = ["francais","anglais","allemand","espagnol","portugais","italien"]; //liste contenant les langues.
+		this.tableauLangue = ["francais","anglais","allemand","espagnol","portugais"]; //liste contenant les langues.
 		this.tableauLangueTaille = this.tableauLangue.length;
 		var i = 0;
 		this.langueDeBase = document.createElement("select");
@@ -118,7 +118,7 @@ class TraductionController extends WidgetController {
 		}
 	
 	async valider() {
-		
+		this.langue = ["fr","en","de","es","pt"];
 		this.mot = document.getElementById("ChampTexte").value; // variable contenant la valeur contenue dans le champ texte.
       	       // this.mot = "prenom";
 		console.log(this.mot);
@@ -127,7 +127,8 @@ class TraductionController extends WidgetController {
         	this.trad = document.getElementById("langueTrad").selectIndex;
         	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
-		this.lien = "https://www.linguee.fr/" + this.tableauLangue[this.baseChoix] + "-" + this.tableauLangue[this.tradChoix] + "/search?source=auto&query=" + this.mot;
+		//this.lien = "https://www.linguee.fr/" + this.tableauLangue[this.baseChoix] + "-" + this.tableauLangue[this.tradChoix] + "/search?source=auto&query=" + this.mot;
+		this.lien = "https://translate.google.com/?oe=utf-8&client=firefox-b-e&um=1&ie=UTF-8&hl=fr&client=tw-ob#" + this.langue[this.baseChoix] + "/" +  this.langue[this.tradChoix] + "/" + this.mot;
 		console.log(this.lien);
 		
 	
@@ -137,7 +138,7 @@ class TraductionController extends WidgetController {
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
-		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="dictionary"]/div[1]/div[1]/div[1]/div/div/div/div/div[1]/h3/span[1]/a[1]').firstResult; // find interesting things
+		this.article = new xph().doc(dom).ctx(dom).craft('/html/body/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[3]/div[1]/div[2]/div/span[1]/span').firstResult; // find interesting things
 		this.mvc.view.update(this.article.textContent);
 		//alert(article.textContent);
 		}
