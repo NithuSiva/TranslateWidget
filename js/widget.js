@@ -128,7 +128,7 @@ class TraductionController extends WidgetController {
         	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
         	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
 		//this.lien = "https://www.linguee.fr/" + this.tableauLangue[this.baseChoix] + "-" + this.tableauLangue[this.tradChoix] + "/search?source=auto&query=" + this.mot;
-		this.lien = "https://www.deepl.com/translator#" + this.langue[this.baseChoix] + "/" +  this.langue[this.tradChoix] + "/" + this.mot;
+		this.lien = "https://context.reverso.net/traduction/francais-anglais/bonjour?" + this.tableauLangue[this.baseChoix] + "-" +  this.tableauLangue[this.tradChoix] + "/" + this.mot;
 		console.log(this.lien);
 		
 	
@@ -138,7 +138,7 @@ class TraductionController extends WidgetController {
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
-		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="lmt_dict"]/div/div/div[1]/div/div/div/div/div/h3/span[1]/a').firstResult; // find interesting things
+		this.article = new xph().doc(dom).ctx(dom).craft('//*[@id="translations-content"]/a[1]').firstResult; // find interesting things
 		this.mvc.view.update(this.article.textContent);
 		//alert(article.textContent);
 		}
