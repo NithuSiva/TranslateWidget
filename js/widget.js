@@ -74,8 +74,8 @@ class TraductionView extends WidgetView {
 	
 
 	
-	update(title) {
-		this.afficher.innerHTML = title;
+	update(mot1, mot2, mot3) {
+		this.afficher.innerHTML = mot1 + ", " + mot2 +", " + mot3;
 		//HH.attr(this.link, {"href": "https://www.lemonde.fr" + link, "target": "_blank"});
 	}
 	
@@ -134,12 +134,15 @@ class TraductionController extends WidgetController {
 	
 		
 	//async load(link) {
-		let result = await this.mvc.main.dom("https://translate.google.fr/?hl=fr#view=home&op=translate&sl=en&tl=fr&text=no"); // load web page
+		let result = await this.mvc.main.dom(this.lien); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
-		this.article = new xph().doc(dom).ctx(dom).craft('/html/body/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[3]/div[1]/div[2]/div/span[1]/span/text()').firstResult; // find interesting things
-		this.mvc.view.update(this.article.textContent);
+		this.article1 = new xph().doc(dom).ctx(dom).craft('//*[@id="translations-content"]/a[1]').firstResult; // find interesting things
+		this.article2 = new xph().doc(dom).ctx(dom).craft('//*[@id="translations-content"]/a[2]').firstResult; // find interesting things
+		this.article3 = new xph().doc(dom).ctx(dom).craft('//*[@id="translations-content"]/a[3]').firstResult; // find interesting things
+
+		this.mvc.view.update(this.article1.textContent, this.article2.textContent, this.article3.textContent);
 		//alert(article.textContent);
 		}
 	
