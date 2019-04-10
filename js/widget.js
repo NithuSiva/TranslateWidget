@@ -152,7 +152,7 @@ class TraductionController extends WidgetController {
 		if(!this.article3){
 			if(!this.article2){
 				if(!this.article1){
-					this.mvc.view.update("pas de definition");
+					this.mvc.view.update(" aucune traduction trouver :(");
 				} else {
 				this.mvc.view.update(this.article1.textContent);
 				}
