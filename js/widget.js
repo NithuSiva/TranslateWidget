@@ -75,7 +75,15 @@ class TraductionView extends WidgetView {
 
 	
 	update(mot1, mot2, mot3) {
-		this.afficher.innerHTML = mot1 + ", " + mot2 +", " + mot3;
+		if(!mot3){
+			if(!mot2){
+				this.afficher.innerHTML = mot1;
+			} else {
+				this.afficher.innerHTML = mot1 + ", " + mot2;
+			}
+		} else {
+			this.afficher.innerHTML = mot1 + ", " + mot2 +", " + mot3;
+		}
 		//HH.attr(this.link, {"href": "https://www.lemonde.fr" + link, "target": "_blank"});
 	}
 	
