@@ -62,7 +62,7 @@ class TraductionView extends WidgetView {
 		// Events.on(this.footer, "click", event => this.mvc.controller.valider());
 		this.stage.appendChild(this.footer);
 		
-		this.afficher = HH.create("a");
+		this.afficher = HH.create("p");
 		this.stage.appendChild(this.afficher);
 		
 		
