@@ -141,8 +141,19 @@ class TraductionController extends WidgetController {
 		this.article1 = new xph().doc(dom).ctx(dom).craft('//*[@id="translations-content"]/a[1]').firstResult; // find interesting things
 		this.article2 = new xph().doc(dom).ctx(dom).craft('//*[@id="translations-content"]/a[2]').firstResult; // find interesting things
 		this.article3 = new xph().doc(dom).ctx(dom).craft('//*[@id="translations-content"]/a[3]').firstResult; // find interesting things
-
+		if(!this.article3){
+			if(!this.article2){
+				if(!this.article1){
+					this.mvc.view.update("pas de definition");
+				} else {
+				this.mvc.view.update(this.article1.textContent);
+				}
+			} else {
+			this.mvc.view.update(this.article1.textContent, this.article2.textContent);
+			}
+		} else {
 		this.mvc.view.update(this.article1.textContent, this.article2.textContent, this.article3.textContent);
+		}
 		//alert(article.textContent);
 		}
 	
