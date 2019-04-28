@@ -56,18 +56,8 @@ class TraductionView extends WidgetView {
 		
 		this.mvc.controller.select();
 		
-        	this.baseChoix = langueBase.selectedIndex;  // variable qui contient le choix de la langue du mot.
-        	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
+        	this.mvc.controller.echanger();
 		
-		this.button = HH.create("button");
-		this.button.innerHTML = "Echanger";
-		this.clickEchanger = this.button.addEventListener("click", event => function() {
-  			document.getElementById("langueBase").selectedIndex = this.tradChoix;
-  			document.getElementById("langueTrad").selectedIndex = this.baseChoix;
-			this.mvc.controller.valider();
-		});
-		
-        
                 this.footer.innerHTML = "valider";  // mise en forme du footer permettant de valider les valeur et choix entrer.
 		SS.style(this.footer, {"userSelect": "none", "cursor": "pointer"});
 		this.click = this.footer.addEventListener("click", event => this.mvc.controller.valider());
@@ -129,10 +119,22 @@ class TraductionController extends WidgetController {
    	   	this.mvc.view.stage.appendChild(this.langueDeTraduction);
 		
 		}
+	
+	echanger() {
+		this.button = HH.create("button");
+		this.button.innerHTML = "Echanger";
+		this.clickEchanger = this.button.addEventListener("click", event => function() {
+			console.log("Echanger");
+  			document.getElementById("langueBase").selectedIndex = this.tradChoix;
+  			document.getElementById("langueTrad").selectedIndex = this.baseChoix;
+			this.mvc.controller.valider();
+		});
 		
 	async valider() {
 		this.langue = ["fr","en","de","es","pt"];
 		
+		this.baseChoix = langueBase.selectedIndex;  // variable qui contient le choix de la langue du mot.
+        	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
 		this.mot = document.getElementById("ChampTexte").value; // variable contenant la valeur contenue dans le champ texte.
 		console.log(this.mot);
 		
