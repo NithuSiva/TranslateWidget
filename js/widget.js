@@ -129,6 +129,7 @@ class TraductionController extends WidgetController {
   			document.getElementById("langueTrad").selectedIndex = this.baseChoix;
 			this.mvc.controller.valider();
 		});
+	}
 		
 	async valider() {
 		this.langue = ["fr","en","de","es","pt"];
