@@ -56,6 +56,9 @@ class TraductionView extends WidgetView {
 		
 		this.mvc.controller.select();
 		
+        	this.baseChoix = langueBase.selectedIndex;  // variable qui contient le choix de la langue du mot.
+        	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
+		
 		this.button = HH.create("button");
 		this.button.innerHTML = "Echanger";
 		this.clickEchanger = this.button.addEventListener("click", event => function() {
@@ -122,11 +125,6 @@ class TraductionController extends WidgetController {
 			langue.innerHTML = this.tableauLangue[i];
 			this.langueDeTraduction.appendChild(langue);
      		 	 }
-		
-		
-        	this.baseChoix = langueBase.selectedIndex;  // variable qui contient le choix de la langue du mot.
-        	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
-		
 	 	this.mvc.view.stage.appendChild(this.langueDeBase);
    	   	this.mvc.view.stage.appendChild(this.langueDeTraduction);
 		
