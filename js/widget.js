@@ -63,16 +63,8 @@ class TraductionView extends WidgetView {
 		this.stage.appendChild(this.footer);
 		
 		this.afficher = HH.create("p");
-		this.stage.appendChild(this.afficher);
-		
-		
-        
+		this.stage.appendChild(this.afficher);  
 	}
-	
-	
-
-	
-
 	
 	update(mot1, mot2, mot3) {
 		if(!mot3){
@@ -85,9 +77,6 @@ class TraductionView extends WidgetView {
 			this.afficher.innerHTML = mot1 + ", " + mot2 +", " + mot3;
 		}
 	}
-	
-	
-	
 }
 
 class TraductionController extends WidgetController {
