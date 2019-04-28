@@ -56,8 +56,6 @@ class TraductionView extends WidgetView {
 		
 		this.mvc.controller.select();
 		
-        	this.mvc.controller.echanger();
-		
                 this.footer.innerHTML = "valider";  // mise en forme du footer permettant de valider les valeur et choix entrer.
 		SS.style(this.footer, {"userSelect": "none", "cursor": "pointer"});
 		this.click = this.footer.addEventListener("click", event => this.mvc.controller.valider());
@@ -119,17 +117,6 @@ class TraductionController extends WidgetController {
    	   	this.mvc.view.stage.appendChild(this.langueDeTraduction);
 		
 		}
-	
-	echanger() {
-		this.button = HH.create("button");
-		this.button.innerHTML = "Echanger";
-		this.clickEchanger = this.button.addEventListener("click", event => function() {
-			console.log("Echanger");
-  			document.getElementById("langueBase").selectedIndex = this.tradChoix;
-  			document.getElementById("langueTrad").selectedIndex = this.baseChoix;
-			this.mvc.controller.valider();
-		});
-	}
 		
 	async valider() {
 		this.langue = ["fr","en","de","es","pt"];
