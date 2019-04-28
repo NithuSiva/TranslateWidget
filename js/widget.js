@@ -122,6 +122,11 @@ class TraductionController extends WidgetController {
 			langue.innerHTML = this.tableauLangue[i];
 			this.langueDeTraduction.appendChild(langue);
      		 	 }
+		
+		
+        	this.baseChoix = langueBase.selectedIndex;  // variable qui contient le choix de la langue du mot.
+        	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
+		
 	 	this.mvc.view.stage.appendChild(this.langueDeBase);
    	   	this.mvc.view.stage.appendChild(this.langueDeTraduction);
 		
@@ -132,9 +137,6 @@ class TraductionController extends WidgetController {
 		
 		this.mot = document.getElementById("ChampTexte").value; // variable contenant la valeur contenue dans le champ texte.
 		console.log(this.mot);
-		
-        	this.baseChoix = langueBase.selectedIndex;  // variable qui contient le choix de la langue du mot.
-        	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
 		
 		this.lien = "https://context.reverso.net/traduction/" + this.tableauLangue[this.baseChoix] + "-" +  this.tableauLangue[this.tradChoix] + "/" + this.mot;
 		console.log(this.lien);
