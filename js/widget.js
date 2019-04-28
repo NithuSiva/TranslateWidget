@@ -61,7 +61,6 @@ class TraductionView extends WidgetView {
 		this.click = this.footer.addEventListener("click", event => this.mvc.controller.valider());
 		
 		this.stage.appendChild(this.footer);
-		this.stage.appendChild(this.button);
 		this.afficher = HH.create("p");
 		this.stage.appendChild(this.afficher);  
 	}
@@ -115,7 +114,6 @@ class TraductionController extends WidgetController {
      		 	 }
 	 	this.mvc.view.stage.appendChild(this.langueDeBase);
    	   	this.mvc.view.stage.appendChild(this.langueDeTraduction);
-		
 		}
 		
 	async valider() {
