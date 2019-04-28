@@ -59,7 +59,7 @@ class TraductionView extends WidgetView {
                 this.footer.innerHTML = "valider";  // mise en forme du footer permettant de valider les valeur et choix entrer.
 		SS.style(this.footer, {"userSelect": "none", "cursor": "pointer"});
 		this.click = this.footer.addEventListener("click", event => this.mvc.controller.valider());
-		// Events.on(this.footer, "click", event => this.mvc.controller.valider());
+		
 		this.stage.appendChild(this.footer);
 		
 		this.afficher = HH.create("p");
@@ -84,7 +84,6 @@ class TraductionView extends WidgetView {
 		} else {
 			this.afficher.innerHTML = mot1 + ", " + mot2 +", " + mot3;
 		}
-		//HH.attr(this.link, {"href": "https://www.lemonde.fr" + link, "target": "_blank"});
 	}
 	
 	
@@ -104,12 +103,17 @@ class TraductionController extends WidgetController {
 	
 	select() { //metode qui creer des liste déroulante 
 		this.tableauLangue = ["francais","anglais","allemand","espagnol","portugais"]; //liste contenant les langues.
+		
 		this.tableauLangueTaille = this.tableauLangue.length;
+		
 		var i = 0;
+		
 		this.langueDeBase = document.createElement("select");
-     	        this.langueDeTraduction = document.createElement("select");
 		this.langueDeBase.setAttribute("id", "langueBase");
+		
+     	        this.langueDeTraduction = document.createElement("select");
 		this.langueDeTraduction.setAttribute("id", "langueTrad");
+		
 		for(i=0;i<this.tableauLangueTaille;i++){
 			var langue = document.createElement("option");
 			langue.innerHTML = this.tableauLangue[i];
@@ -127,28 +131,25 @@ class TraductionController extends WidgetController {
 	
 	async valider() {
 		this.langue = ["fr","en","de","es","pt"];
+		
 		this.mot = document.getElementById("ChampTexte").value; // variable contenant la valeur contenue dans le champ texte.
-      	       // this.mot = "prenom";
 		console.log(this.mot);
-		this.base = document.getElementById("langueBase").selectIndex; 
-        	this.baseChoix = langueBase.selectedIndex;  // variable qui contient le choix de la langue du mot
-        	this.trad = document.getElementById("langueTrad").selectIndex;
+		
+        	this.baseChoix = langueBase.selectedIndex;  // variable qui contient le choix de la langue du mot.
         	this.tradChoix = langueTrad.selectedIndex; // variable qui contient le choix de langue dans lequel sera traduit le mot.
-        	//alert("[" + this.mot + "]" + " " + this.tableauLangue[this.baseChoix] + " -->" + " " + this.tableauLangue[this.tradChoix] + " " );
-		//this.lien = "https://www.linguee.fr/" + this.tableauLangue[this.baseChoix] + "-" + this.tableauLangue[this.tradChoix] + "/search?source=auto&query=" + this.mot;
+		
 		this.lien = "https://context.reverso.net/traduction/" + this.tableauLangue[this.baseChoix] + "-" +  this.tableauLangue[this.tradChoix] + "/" + this.mot;
 		console.log(this.lien);
 		
-	
-		
-	//async load(link) {
 		let result = await this.mvc.main.dom(this.lien); // load web page
 		let domstr = _atob(result.response.dom); // decode result
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
+		
 		this.article1 = new xph().doc(dom).ctx(dom).craft('//*[@id="translations-content"]/a[1]').firstResult; // find interesting things
 		this.article2 = new xph().doc(dom).ctx(dom).craft('//*[@id="translations-content"]/a[2]').firstResult; // find interesting things
 		this.article3 = new xph().doc(dom).ctx(dom).craft('//*[@id="translations-content"]/a[3]').firstResult; // find interesting things
+		
 		if(!this.article3){
 			if(!this.article2){
 				if(!this.article1){
@@ -162,7 +163,6 @@ class TraductionController extends WidgetController {
 		} else {
 		this.mvc.view.update(this.article1.textContent, this.article2.textContent, this.article3.textContent);
 		}
-		//alert(article.textContent);
-		}
+	}
 	
 }
