@@ -1,1 +1,1 @@
-# widget
+# Translate widget
