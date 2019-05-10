@@ -15,8 +15,6 @@ class TraductionWidget extends Widget {
 	
 	async ready() {
 		super.ready();
-		//this.controller.load();
-		
 	}
 	
 }
@@ -65,7 +63,7 @@ class TraductionView extends WidgetView {
 		this.stage.appendChild(this.afficher);  
 	}
 	
-	update(mot1, mot2, mot3) {
+	update(mot1, mot2, mot3) { //metode qui affiche les resultats.
 		if(!mot3){
 			if(!mot2){
 				this.afficher.innerHTML = mot1;
@@ -89,7 +87,7 @@ class TraductionController extends WidgetController {
 		
 	}
 	
-	select() { //metode qui creer des liste déroulante 
+	select() { //metode qui creer deux listes déroulante qui contient les langues. 
 		this.tableauLangue = ["francais","anglais","allemand","espagnol","portugais"]; //liste contenant les langues.
 		
 		this.tableauLangueTaille = this.tableauLangue.length;
@@ -132,16 +130,16 @@ class TraductionController extends WidgetController {
 		let parser = new DOMParser(); // init dom parser
 		let dom = parser.parseFromString(domstr, "text/html"); // inject result
 		
-		this.article1 = new xph().doc(dom).ctx(dom).craft('//*[@id="translations-content"]/a[1]').firstResult; // find interesting things
-		this.article2 = new xph().doc(dom).ctx(dom).craft('//*[@id="translations-content"]/a[2]').firstResult; // find interesting things
-		this.article3 = new xph().doc(dom).ctx(dom).craft('//*[@id="translations-content"]/a[3]').firstResult; // find interesting things
+		this.article1 = new xph().doc(dom).ctx(dom).craft('//*[@id="translations-content"]/a[1]').firstResult; // cherche le premier resultat de la traduction.
+		this.article2 = new xph().doc(dom).ctx(dom).craft('//*[@id="translations-content"]/a[2]').firstResult; // cherche le deuxieme resultat de la traduction.
+		this.article3 = new xph().doc(dom).ctx(dom).craft('//*[@id="translations-content"]/a[3]').firstResult; // cherche le troisieme resultat de la traduction.
 		
-		if(!this.article3){
+		if(!this.article3){ //On verifie si les resultats obtenue son vide (false).
 			if(!this.article2){
 				if(!this.article1){
-					this.mvc.view.update(" aucune traduction trouver :(");
+					this.mvc.view.update(" Aucune traduction pour ce mot !"); //Si les trois resultat sont vide alors on affiche un message d'erreur.
 				} else {
-				this.mvc.view.update(this.article1.textContent);
+				this.mvc.view.update(this.article1.textContent);//Sinon, si il y'a au moins un resultat positif, alors on affiche le resultat.
 				}
 			} else {
 			this.mvc.view.update(this.article1.textContent, this.article2.textContent);
